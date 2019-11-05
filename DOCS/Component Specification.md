@@ -30,7 +30,7 @@ raw_data  ---->  data cleaning and selection ---->  useful_listing_df ----> retu
 
 
 
-###Use case 2: Recommend top 10 rooms for customers  
+### Use case 2: Recommend top 10 rooms for customers  
 
 The data manager will provide methods to handle the search query from frontend user input and return need data structure to frontend.
 
@@ -46,9 +46,9 @@ raw_data ----> cleaning and selection ----> useful_listing_df ----> ML package -
 
 
 
-##Preliminary Plan
+## Preliminary Plan
 
-####Tasks:
+#### Tasks:
 
 - Finish writing data_manager.py to provide needed methods.
 - Finish writing machine learning handle package to predict recommend data
