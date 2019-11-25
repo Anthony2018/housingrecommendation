@@ -18,7 +18,9 @@ It will get the raw data from URL we provided and will clean and choose useful d
 
 It will operate like the frontend manager that will get the data from backend data manager and visualize the data for user.  
 
+### machine_learning.py
 
+it will give the prediction price for the land lord who wants to rent the house.
 
 ## Interactions to accomplish use cases:
 
