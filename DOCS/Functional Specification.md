@@ -39,6 +39,7 @@ The following Airbnb activity is included in this Seattle dataset:
 * Reviews, including unique id for each reviewer and detailed comments, 92 columns
 
 * Calendar, including listing id and the price and availability for that day, 6 columnsAfter selecting, the dataset review was deleted to 38 columns.
+(from https://www.kaggle.com/airbnb/seattle#reviews.csv)
 
 ## Use Cases
 
