@@ -4,6 +4,7 @@
         <title>Rent Price Prediciton</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <link rel="stylesheet" href="/stylesheets/main.css">
+        <script src="js/predict_source.js"></script>
     </head>
 
 <body>
@@ -44,8 +45,11 @@
 		      		</label>  
                 </div>
             </form>
-            <a href="/campgrounds">Go Back</a>
+            <div>		           
+		      <button type = "button" id="click" onclick = "myclick()" style = "width:200px;height:50px;">PREDICT PRICE!</button> 
+			</div>
             <h4>Your Suggested Price:</h4>
+            <p id = "result"></p>
         </div>
     </div>
 </div>
@@ -84,9 +88,6 @@
 		var accor = document.getElementById("accommodates").value;
 		var bed = document.getElementById("bed").value;
 		var bath = document.getElementById("bath").value;
-		var neighborhood = document.getElementById("neighborhood").value;
-		var property = document.getElementById("property").value;
-		var room = document.getElementById("room").value;
 		var result = 80 + accor * 19 + bed * 12 + bath * 23;
 		document.getElementById("result").innerHTML = "$" + result;
 	}
