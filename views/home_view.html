@@ -9,75 +9,10 @@
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.37.0/mapbox-gl.css' rel='stylesheet' />
     <style>
         body { margin:20; padding:10; }
-        #map { position:absolute; top:50px; bottom:10px; right:30px; width:50%; }
-        #sidebar {position:absolute; top:50px; left:30px; }
-        #information {position:absolute; top:130px; left:30px; width:500px;}
-        #housepicture{position: absolute; top: 500px; left:30px;width:30%;}
-    	#contact-form {
-				   /*background-color:rgba(72,72,72,0.7);*/
-				   padding: 10px 20px 30px 20px;
-				   width:100%;
-				   height:100%;
-				   float: left;
-				   
-				   position: absolute;
-				   
-				   -webkit-border-radius:7px;
-				   -moz-border-radius:7px;
-				}
-				#contact-form input,   
-				#contact-form select,   
-				#contact-form textarea,   
-				#contact-form label { 
-				   font-size: 15px;  
-				   margin-bottom: 2px;
-				   font-family: Arial, san-serif;
-				} 
-				#contact-form input,   
-				#contact-form select,   
-				#contact-form textarea { 
-				   width:300px;
-				   /*background: #fff;*/
-				   border: 0; 
-				   -moz-border-radius: 4px;  
-				   -webkit-border-radius: 4px;  
-				   border-radius: 4px;
-				   margin-bottom: 25px;  
-				   padding: 5px;  
-				}  
-				#contact-form input:focus,   
-				#contact-form select:focus,   
-				#contact-form textarea:focus {  
-				   /*background-color: #E5E6E7; */
-				}  
-				#contact-form textarea {
-				   width:300px;
-				   height: 150px;
-				}
-				
-				
-				#contact-form .required {  
-				   font-weight:bold;  
-				   /*color: #E5E6E7; */     
-				}
-
-			
-				/* Make form look nice on smaller screens */
-				@media only screen and (max-width: 580px) {
-				   #contact-form{
-				      left: 3%;
-				      margin-right: 3%;
-				      width: 88%;
-				      margin-left: 0;
-				      padding-left: 3%;
-				      padding-right: 3%;
-				   }
-				}
-				#result_form {
-					position:absolute;
-					right:400px;
-					top:100px;
-				}
+        #map { position:absolute; top:50px; bottom:10px; width:50%; }
+        #sidebar {position:absolute; top:50px; right:100px; }
+        #information {position:absolute; top:130px; right:100px; width:500px;}
+    
     </style>
 </head>
 
@@ -87,83 +22,14 @@
         Seattle Airbnb Visualization of Homes
     </h2>
 
-   <!--  map -->
+    <!--map-->
 
-    
-
-    <!--buttons-->
-    <div id = "sidebar">
-        <button id = "entire" onclick = "click1()" style = "width:150px;height:40px;font: 14px sans-serif;background-color: #fbb03b">Entire home/apt</button>
-        <button id = "private" onclick = "click2()" style = "width:150px;height:40px;font: 14px sans-serif;background-color: #3bb2d0">Private room</button>
-        <button id = "shared" onclick = "click3()" style = "width:150px;height:40px;font: 14px sans-serif;background-color: #e55e5e">Shared room</button>
-    </div>
-
-    <script>
-        document.getElementById('entire').active = true;
-        document.getElementById('private').active = true;
-        document.getElementById('shared').active = true;
-
-        function click1(){
-            document.getElementById('entire').active = document.getElementById('entire').active ? false : true;
-            
-            if(document.getElementById('entire').active){
-                map.setLayoutProperty("entire_fills", 'visibility', 'visible');
-                document.getElementById('entire').style["background-color"] = "#fbb03b";
-
-            } else{
-                map.setLayoutProperty("entire_fills", 'visibility', 'none');
-                document.getElementById('entire').style["background-color"] = "#a7a8aa";
-            }
-            
-        };
-
-        function click2(){
-            document.getElementById('private').active = document.getElementById('private').active ? false : true;
-
-            if(document.getElementById('private').active){
-                map.setLayoutProperty("private_fills", 'visibility', 'visible');
-                 document.getElementById('private').style["background-color"] = "#3bb2d0";
-            } else{
-                map.setLayoutProperty("private_fills", 'visibility', 'none');
-                document.getElementById('private').style["background-color"] = "#a7a8aa";
-            }
-        };
-
-        function click3(){
-             document.getElementById('shared').active = document.getElementById('shared').active ? false : true;
-
-             if(document.getElementById('shared').active){
-                map.setLayoutProperty("shared_fills", 'visibility', 'visible');
-                document.getElementById('shared').style["background-color"] = "#e55e5e";
-            } else{
-                map.setLayoutProperty("shared_fills", 'visibility', 'none');
-                document.getElementById('shared').style["background-color"] = "#a7a8aa";
-            }
-        };
-    </script>
-
-
-    <!--information box-->
-    <div id = "information">
-        <fieldset>
-            <legend><strong>Detailed Information of Home</strong></legend>
-            <div id = "home_name"></div>
-            <div id = "home_address"></div>
-            <div id = "home_neighbourhood"></div>
-            <div id = "home_roomtype"></div>
-            <div id = "home_price"></div>
-            <div id = "home_pic"></div>
-        </fieldset>
-    </div>
-
-
-
-	<div id='map'></div>
+    <div id='map'></div>
     <script>
         mapboxgl.accessToken = 'pk.eyJ1Ijoid2FuZ2JlaXFpMTk5MTU5IiwiYSI6ImNqMm1kcTNjczAwdWUyd253Z3IxcW5xMHYifQ.iws1nZ75QX-5DETQPedmnQ';
         var map = new mapboxgl.Map({
                 container: 'map',
-                style: 'mapbox://styles/mapbox/streets-v8',
+                style: 'mapbox://styles/mapbox/light-v9',
                 center: [-122.325769,47.620057],
                 zoom: 10.1
         });
@@ -186,7 +52,7 @@
                             'stops': [[12, 2.3], [20, 200]]
                         },
                         
-                        'circle-color': "yellow",
+                        'circle-color': "#fbb03b",
                         "circle-opacity": 0.85,
                     },
                     "filter": ["==", "room_type", "Entire home/apt"]
@@ -205,7 +71,7 @@
                             'stops': [[12, 2.3], [20, 200]]
                         },
                         
-                        'circle-color': "blue",
+                        'circle-color': "#fbb03b",
                         "circle-opacity": 0.85,
                     },
                     "filter": ["==", "room_type", "Private room"]
@@ -224,7 +90,7 @@
                             'stops': [[12, 2.3], [20, 200]]
                         },
                         // color circles by ethnicity, using data-driven styles
-                        'circle-color': "red",
+                        'circle-color': "#fbb03b",
                         "circle-opacity": 0.85,
                     },
                     "filter": ["==", "room_type", "Shared room"]
@@ -277,6 +143,83 @@
         });
 
     </script>
+
+    <!--buttons-->
+    <!-- <div id = "sidebar">
+        <button id = "entire" onclick = "click1()" style = "width:150px;height:40px;font: 14px sans-serif;background-color: #fbb03b">Entire home/apt</button>
+        <button id = "private" onclick = "click2()" style = "width:150px;height:40px;font: 14px sans-serif;background-color: #3bb2d0">Private room</button>
+        <button id = "shared" onclick = "click3()" style = "width:150px;height:40px;font: 14px sans-serif;background-color: #e55e5e">Shared room</button>
+    </div> -->
+
+    <script>
+        document.getElementById('entire').active = true;
+        document.getElementById('private').active = true;
+        document.getElementById('shared').active = true;
+
+        function click1(){
+            document.getElementById('entire').active = document.getElementById('entire').active ? false : true;
+            
+            if(document.getElementById('entire').active){
+                map.setLayoutProperty("entire_fills", 'visibility', 'visible');
+                document.getElementById('entire').style["background-color"] = "#fbb03b";
+
+            } else{
+                map.setLayoutProperty("entire_fills", 'visibility', 'none');
+                document.getElementById('entire').style["background-color"] = "#a7a8aa";
+            }
+            
+        };
+
+        function click2(){
+            document.getElementById('private').active = document.getElementById('private').active ? false : true;
+
+            if(document.getElementById('private').active){
+                map.setLayoutProperty("private_fills", 'visibility', 'visible');
+                 document.getElementById('private').style["background-color"] = "#3bb2d0";
+            } else{
+                map.setLayoutProperty("private_fills", 'visibility', 'none');
+                document.getElementById('private').style["background-color"] = "#a7a8aa";
+            }
+        };
+
+        function click3(){
+             document.getElementById('shared').active = document.getElementById('shared').active ? false : true;
+
+             if(document.getElementById('shared').active){
+                map.setLayoutProperty("shared_fills", 'visibility', 'visible');
+                document.getElementById('shared').style["background-color"] = "#e55e5e";
+            } else{
+                map.setLayoutProperty("shared_fills", 'visibility', 'none');
+                document.getElementById('shared').style["background-color"] = "#a7a8aa";
+            }
+        };
+    </script>
+
+
+    <!--information box-->
+    <div style = "position:absolute; top:130px; right:100px; width: 18rem;" class="card" >
+    	<div id = "home_pic"></div>
+        <fieldset>
+            <legend><strong>Detailed Information of Home</strong></legend>
+            <div id = "home_name"></div>
+            <div id = "home_address"></div>
+            <div id = "home_neighbourhood"></div>
+            <div id = "home_roomtype"></div>
+            <div id = "home_price"></div>
+            <div id = "home_pic"></div>
+        </fieldset>
+    </div>
+ 
+
+    
+
+
+
+
+
+
+
+
 
 </body>
 </html>
