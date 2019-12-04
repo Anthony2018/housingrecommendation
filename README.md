@@ -32,9 +32,7 @@ housingrecommendation
 │    └─ technology_review.pdf
 ├─ README.md
 ├─ code
-│    ├─ .DS_Store
 │    ├─ MLCODE
-│    │    ├─ .DS_Store
 │    │    ├─ Result.csv
 │    │    ├─ machine learning data prepare for the house price.ipynb
 │    │    └─ machine learning model for the house price.ipynb
@@ -45,11 +43,9 @@ housingrecommendation
 │    ├─ listings.csv
 │    └─ reviews.csv
 ├─ example
-│    ├─ .DS_Store
 │    ├─ House-Prices.ipynb
 │    └─ folium_demo.ipynb
 └─ views
-       ├─ .DS_Store
        ├─ home_view.html
        ├─ landing.html
        ├─ prediction.html
