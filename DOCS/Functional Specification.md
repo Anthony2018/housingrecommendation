@@ -47,25 +47,17 @@ The following Airbnb activity is included in this Seattle dataset:
 
 #### Detailed listing information on map view
 
- Database with listing information and location
-User interface that allows users to select area
-Map view that allows users to visualize all rooms location in this area
+The user can select the aimed area in map and get the location pots by visualization. Data about the houses including listing information and location is shown when cursor hangs.
 
 ### Use case 2
 
 #### Recommend top 10 rooms for customers
 
-Database with guests’ review scores
-User interface that allows users to input the info about the room
-User interface that allows users to select the order of recommendations
-Map view that allows users to visualize the recommendations’ location
+The user can select from a drop-down menu about the number of rooms, persons number, and price range to show the data about houses including location and other information. In user interface, users could select the order of recommendations. Map view that allows users to visualize the recommendations’ location.In the same time, map could show the guests’ review scores.
 
 ### Use case 3
 
 #### Recommend room price for landlord
 
-Database with price of houses around it
-User interface that allows users to input the info about the room to
-improve the accuracy of predicted price
-Map view that allows users to visualize all houses or the similar rooms
-around it
+The user can use interface to input the info about the room to get the all houses or the similar rooms around the house to improve the accuracy of predicted price. Map view that allows users to visualize 
+around it.
