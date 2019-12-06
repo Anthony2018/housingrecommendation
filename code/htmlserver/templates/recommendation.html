@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>House Recommendation</title>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.37.0/mapbox-gl.js'></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.37.0/mapbox-gl.css' rel='stylesheet' />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <style>
+        body { margin:0; padding: 0;}
+        /* #map { width: 50%; height: 700px; float: left;} */
+        .marker {
+            background-image: url('../static/location.png');
+            background-size: cover;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .mapboxgl-popup {
+            width: fit-content;
+            height: fit-content;
+        }
+
+        .mapboxgl-popup-content {
+            text-align: center;
+            font-family: 'Open Sans', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="text-align: center;">House Recommendation</h1>
+
+    <div id="container" style="width:100%">
+
+            <div id="interactive_box">
+                    <form name="input" method="POST">
+                        <div class="form-row align-items-center">
+                            <div class="col-auto my-1" style="width: fit-content; float: left; margin-right: 20px;">
+                                <input type="text" name="zipcode" id="zipcode" class="form-control mb-2" placeholder="Zipcode"required> 
+                            </div>
+        
+                            <div class="col-auto my-1" style="width: fit-content; float: left; margin-right: 20px;">
+                                <input type="text" name="nights" id="nights" class="form-control mb-2" placeholder="Nights to live" required> 
+                            </div>
+        
+                            <div class="col-auto my-1" style="width: fit-content; float: left; margin-right: 20px;">
+                                <input type="text" name="price" id="price" class="form-control mb-2" placeholder="Price per night less than $"> 
+                            </div>
+        
+                            <div class="col-auto my-1" style="width: fit-content; float: left; margin-right: 20px;">
+                                    <select class="form-control" name="room_type" id="room_type">
+                                        <option value="" selected>Room type </option>
+                                        <option value="Entire home/apt">Entire home/apt</option>
+                                        <option value="Private room">Private Room</option>
+                                        <option value="">All</option>
+                                    </select>
+                            </div>
+        
+                            <div class="col-auto my-1" style="width: fit-content; float: left; margin-right: 20px;">
+                                    <select class="form-control" name="accommodates" id="accommodates">
+                                        <option value="" selected>Accommodates </option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6 and more</option>
+                                    </select>
+                            </div>
+        
+                            <div class="col-auto my-1" style="width: fit-content; float: left; margin-right: 20px;">
+                                    <select class="form-control" name="score" id="score">
+                                        <option value="" selected>Rating Score more than ... </option>
+                                        <option value="90">More than 90</option>
+                                        <option value="80">More than 80</option>
+                                        <option value="70">More than 70</option>
+                                        <option value="60">More than 60</option>
+                                    </select>
+                            </div>
+                            
+                            <div class="col-auto my-1" style="width: fit-content; float: left; margin-right: 20px;">
+                                <div class= "form-check my-1">
+                                    <input class="form-check-input" type="checkbox" name="super_host" id="super_host" value="True">
+                                    <label class="form-check-label" for="super_host">
+                                        Super Host
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="col-auto my-1" style="width: fit-content; float: left; margin-right: 20px;">
+                                <div class= "form-check my-1">
+                                    <input class="form-check-input" type="checkbox" name="verified_host" id="verified_host" value="True">
+                                    <label class="form-check-label" for="verified_host">
+                                        Verified Host
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="col-auto my-1" style="width: fit-content; float: left; margin-right: 20px;">
+                                <div class= "form-check my-1">
+                                    <input class="form-check-input" type="checkbox" name="need_license" id="need_license" value="True">
+                                    <label class="form-check-label" for="need_license">
+                                        Required license
+                                    </label>
+                                </div>
+                            </div>
+        
+                            <div class="col-auto my-1">
+                                <button class="btn btn-primary mb-2" type="submit">Get recommendation!</button>
+                            </div>
+                        </div>        
+                    </form>
+                    <br>
+                </div>
+
+        
+        <div id='map' style="width: 50%; height: 700px; float: left;">
+            <script>
+                mapboxgl.accessToken = 'pk.eyJ1Ijoid2FuZ2JlaXFpMTk5MTU5IiwiYSI6ImNqMm1kcTNjczAwdWUyd253Z3IxcW5xMHYifQ.iws1nZ75QX-5DETQPedmnQ';
+                var map = new mapboxgl.Map({
+                    container: 'map',
+                    style: 'mapbox://styles/mapbox/streets-v10',
+                    center: [-122.325769,47.620057],
+                    zoom: 10.1
+                });
+                map.on('load', function() {
+                    var points_list = {{ points_list|safe }}
+                    points_list.forEach(function(marker) {
+                        var el = document.createElement('div');
+                        el.className = 'marker';
+                        el.style.left = '-15px';
+                        el.style.top = '-32px';
+
+                        new mapboxgl.Marker(el)
+                        .setLngLat(marker.geometry.coordinates)
+                        .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+                            .setHTML('<h3> <a href='+ marker.properties.url + '>' + marker.properties.title + '</a></h3><br>'
+                            + '<img src=' + marker.properties.thumbnail_url + ' alt="No picture" width="250" height="200"><br>'
+                            + marker.properties.price + '/night <br>' + 
+                            'Accommodates: ' + marker.properties.accommodates + '<br>' 
+                            + marker.properties.room_type))
+                        .addTo(map);
+                    });
+                });
+
+            </script>
+        </div>
+
+
+        <div id="house_list" style="height:700px;float:left; margin-left: 50px; overflow-y: auto;">
+            <h3>The House we recoomend for you:</h3> <br>
+            {% for index, value in house_list.iterrows() %}
+                <img src="{{ value['picture_url'] }}" alt="No picture">
+                <h4>{{value['name']}}</h4>
+                Price: {{ value['price'] }} per night, 
+                Accommodates: {{ value['accommodates'] }}, 
+                Room Type: {{ value['room_type'] }}, 
+                Rating Score: {{ value['review_scores_rating']}}
+                <br>
+                <p>
+                    <a href="{{ value['listing_url']}}" class="btn btn-primary">More Info</a>
+                </p>
+                <br>
+            {% endfor %}
+
+        </div>
+        
+    </div>
+</body>
+
+</html>
