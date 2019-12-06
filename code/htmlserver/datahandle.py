@@ -36,7 +36,7 @@ def primary_recommend_search(zipcode: str, accommodates: int = None, price: str 
     review_scores_rating: int = None, host_is_superhost: bool = None, host_identity_verified: bool = None, \
     room_type: str = None, bathrooms: float = None, bedrooms: int = None, cleaning_fee: str = None, \
     guests_included: int = None, nights: int = None, review_scores_cleanliness: int = None, \
-    review_scores_accuracy: int = None, requires_license: bool = None, \
+    review_scores_accuracy: int = None, requires_license: bool = None, limit: int = None,\
     sorting_list: list = ['review_scores_rating', 'price'], sorting_way: list = [False, True]):
     '''
     Recommend house by using many more parameters than basic search, but all of these parameters are set to None
@@ -75,6 +75,8 @@ def primary_recommend_search(zipcode: str, accommodates: int = None, price: str 
     if requires_license != None:
         temp_df = temp_df[temp_df['requires_license'] == requires_license]
     temp_df = temp_df.sort_values(sorting_list, ascending = sorting_way)
+    if limit != None:
+        temp_df = temp_df.head(limit)
     return temp_df
 
 
