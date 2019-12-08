@@ -37,7 +37,7 @@ def viewallhouse():
     return render_template('home_view.html', points_list = points_list)   
 
 @app.route('/recommendation.html', methods=['GET', 'POST'])
-@app.route('/index.html', methods=['GET', 'POST'])
+@app.route('/recommendation', methods=['GET', 'POST'])
 def recommendation():
     if request.method == 'POST':
         zipcode = request.form.get('zipcode')
