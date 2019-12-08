@@ -27,7 +27,7 @@ def get_marker_points(df):
 def index():
     return render_template('landing.html')
 
-@app.route('/prediction.html')
+@app.route('/prediction')
 def prediction():
     return render_template('prediction.html')
 
