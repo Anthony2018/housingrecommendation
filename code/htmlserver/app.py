@@ -31,7 +31,7 @@ def index():
 def prediction():
     return render_template('prediction.html')
 
-@app.route('/home_view.html')
+@app.route('/homeview')
 def viewallhouse():
     points_list = get_marker_points(dh.useful_listing_df)
     return render_template('home_view.html', points_list = points_list)   
