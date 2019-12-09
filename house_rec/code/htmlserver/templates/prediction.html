@@ -17,7 +17,7 @@
                 <div class="form-group">
                     <label for="accommodates">
 		      		<span class="required">Accommodates</span> 
-		      		<input type="number" id="accommodates" value="" required="required" class= "form-control"/>
+		      		<input type="number" id="accommodate" value="" required="required" class= "form-control"/>
 		      		</label> 
                 </div>
                 <div class="form-group">
@@ -29,7 +29,7 @@
                 <div class="form-group">
                     <label for="bath">
 		      		<span class="required">Bedrooms</span>
-		      		<input type="number" id="bath" value="" tabindex="4" required="required" class= "form-control"/>
+		      		<input type="number" id="bedroom" value="" tabindex="4" required="required" class= "form-control"/>
 		      		</label>  
                 </div>
                 <div class="form-group">
@@ -60,36 +60,26 @@
 </div> -->
 
 <script type="text/javascript">
-	var n1 = group_list.length
-	for(i = 0; i < n1; i++){
-		var opt = document.createElement('option');
-        opt.value = group_value[i]
-        opt.innerHTML = group_list[i]
-        document.getElementById("neighborhood").appendChild(opt)
-	}
-
-	var n2 = property_list.length
-	for(i = 0; i < n2; i++){
-		var opt = document.createElement('option');
-        opt.value = property_value[i]
-        opt.innerHTML = property_list[i]
-        document.getElementById("property").appendChild(opt)
-	}
-
-	var n3 = room_list.length
-	for(i = 0; i < n3; i++){
-		var opt = document.createElement('option');
-        opt.value = room_value[i]
-        opt.innerHTML = room_list[i]
-        document.getElementById("room").appendChild(opt)
-	}
-
 	function myclick(){
-		var accor = document.getElementById("accommodates").value;
+		var accor = document.getElementById("accommodate").value;
 		var bed = document.getElementById("bed").value;
 		var bath = document.getElementById("bath").value;
-		var result = 80 + accor * 19 + bed * 12 + bath * 23;
-		document.getElementById("result").innerHTML = "$" + result;
+        var bedroom = document.getElementById("bedroom").value;
+        var review = document.getElementById("review").value;
+        // array([-1.83837091e+01, -3.20326998e-02,  1.34496137e+02,  
+        //         8.61769630e+01, -6.66696707e+00, -8.86137549e+01,  
+        //         2.16864018e+01,  8.38746476e+00, -3.86307155e+01,  
+        //         2.69403104e+01, -1.14490092e+00, -7.95264839e+01, 
+        //        -4.49132677e+01,  1.30291913e-01,  4.25632233e+02])
+		var result =  -1.83837091e+01 * accor   - 3.20326998e-02 * Math.pow(accor,2)  + 1.34496137e+02 * Math.sqrt(accor) 
+                     + 8.61769630e+01 * bath    - 6.66696707e+00 * Math.pow(bath,2)   - 8.86137549e+01 * Math.sqrt(bath) 
+                     + 2.16864018e+01 * bedroom + 8.38746476e+00 * Math.pow(bedroom,2)- 3.86307155e+01 * Math.sqrt(bedroom) 
+                     + 2.69403104e+01 * bed     - 1.14490092e+00 * Math.pow(bed,2)    - 7.95264839e+01 * Math.sqrt(bed) 
+                     - 4.49132677e+01 * review  + 1.30291913e-01 * Math.pow(review,2) + 4.25632233e+02 * Math.sqrt(review);
+        
+          
+        
+		document.getElementById("result").innerHTML = "$" + Math.round(result/12);
 	}
 
 	

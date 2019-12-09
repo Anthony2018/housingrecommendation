@@ -82,3 +82,40 @@ User interface that allows users to input the info about the room to
 improve the accuracy of predicted price
 Map view that allows users to visualize all houses or the similar rooms
 around it
+
+
+### Instruction for setup
+
+Application is running on Flask framework, so users need to install corresponding module in advance.
+
+* Install following package
+
+  ```shell
+  pip3 install flask
+  pip3 install geojson
+  pip3 install pandas
+  pip3 install numpy
+  pip3 install json
+  pip3 install requests
+  pip3 install sklearn
+  ```
+
+* clone the repo: 
+
+  ```shell
+  git clone https://github.com/adonis-wyc/housingrecommendation.git
+  ```
+
+* Go to htmlserver foler:
+
+  ```shell
+  cd housingrecommendation/code/htmlserver
+  ```
+
+* run backend server in flask
+
+  ```shell
+  flask run
+  ```
+
+* type http://127.0.0.1:5000/ in the browser
