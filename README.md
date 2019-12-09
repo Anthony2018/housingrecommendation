@@ -26,32 +26,34 @@ The following Airbnb activity is included in this Seattle dataset:
 
 ```
 housingrecommendation
-├─ DOCS
+├─ .gitignore
+├─ .travis.yml
+├─ LICENSE
+├─ README.md
+├─ docs
 │    ├─ Component Specification.md
 │    ├─ Functional Specification.md
 │    └─ technology_review.pdf
-├─ README.md
-├─ code
-│    ├─ MLCODE
-│    │    ├─ Result.csv
-│    │    ├─ machine learning data prepare for the house price.ipynb
-│    │    └─ machine learning model for the house price.ipynb
-│    └─ datahandle.py
-├─ data
-│    ├─ ML_Result.csv
-│    ├─ calendar.csv
-│    ├─ listings.csv
-│    └─ reviews.csv
 ├─ example
 │    ├─ House-Prices.ipynb
 │    └─ folium_demo.ipynb
-└─ views
-       ├─ home_view.html
-       ├─ landing.html
-       ├─ prediction.html
-       └─ stylesheets
-              ├─ landing.css
-              └─ main.css
+├─ house_rec
+│    ├─ __init__.py
+│    ├─ code
+│    │    ├─ __init__.py
+│    │    ├─ htmlserver
+│    │    ├─ ml
+│    │    └─ views
+│    ├─ data
+│    │    ├─ calendar.csv
+│    │    ├─ listings.csv
+│    │    └─ reviews.csv
+│    └─ tests
+│           ├─ __init__.py
+│           ├─ test_cleaned_data.py
+│           └─ test_datahandle.py
+├─ requirment.txt
+└─ setup.py
 ```
 
 ## Use Cases
@@ -88,7 +90,9 @@ around it
 
 Application is running on Flask framework, so users need to install corresponding module in advance.
 
-* Install following package
+- run requirements.txt to ensure all dependencies exist : pip install -r requirements.txt
+
+* Install following otehr package
 
   ```shell
   pip3 install flask
