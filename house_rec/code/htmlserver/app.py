@@ -33,7 +33,7 @@ def prediction():
 
 @app.route('/homeview')
 def viewallhouse():
-    points_list = get_marker_points(dh.useful_listing_df)
+    points_list = get_marker_points(dh.get_raw_useful_listing_df())
     return render_template('home_view.html', points_list = points_list)   
 
 @app.route('/recommendation.html', methods=['GET', 'POST'])
