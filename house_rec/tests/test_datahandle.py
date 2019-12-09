@@ -5,8 +5,6 @@ import sys
 sys.path.append("../code/htmlserver")
 import datahandle as dh
 
-
-
 class TestDataHandle(unittest.TestCase):
     
     def test_get_raw_useful_listing_df(self):

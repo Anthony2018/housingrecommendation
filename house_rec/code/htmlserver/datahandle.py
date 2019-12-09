@@ -1,5 +1,6 @@
 import pandas as pd
-import numpy as np 
+import numpy as np
+from pathlib import Path
 
 # # listing_url = "https://raw.githubusercontent.com/adonis-wyc/housingrecommendation/master/data/listings.csv"
 # # review_url = "https://raw.githubusercontent.com/adonis-wyc/housingrecommendation/master/data/reviews.csv"
@@ -24,8 +25,9 @@ def get_raw_useful_listing_df():
     '''
     Return the raw useful_listing  dataframe
     '''
-    raw_listing_df = pd.read_csv('listings.csv') # raw listing dataframe with 96 columns
-    raw_review_df = pd.read_csv('reviews.csv') # raw review dataframe with 6 columns
+    dir = Path(__file__).absolute().parent
+    raw_listing_df = pd.read_csv(dir / 'listings.csv') # raw listing dataframe with 96 columns
+    raw_review_df = pd.read_csv(dir / 'reviews.csv') # raw review dataframe with 6 columns
 
     # Select needed 38 columns into useful_listing_df
     useful_listing_df = raw_listing_df[['id', 'listing_url', 'name', 'description', 'thumbnail_url',
