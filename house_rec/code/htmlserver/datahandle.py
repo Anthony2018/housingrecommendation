@@ -1,35 +1,54 @@
 import pandas as pd
-import numpy as np 
+import numpy as np
+from pathlib import Path
 
-# listing_url = "https://raw.githubusercontent.com/adonis-wyc/housingrecommendation/master/data/listings.csv"
-# review_url = "https://raw.githubusercontent.com/adonis-wyc/housingrecommendation/master/data/reviews.csv"
-raw_listing_df = pd.read_csv('listings.csv') # raw listing dataframe with 96 columns
-raw_review_df = pd.read_csv('reviews.csv') # raw review dataframe with 6 columns
+# # listing_url = "https://raw.githubusercontent.com/adonis-wyc/housingrecommendation/master/data/listings.csv"
+# # review_url = "https://raw.githubusercontent.com/adonis-wyc/housingrecommendation/master/data/reviews.csv"
+# raw_listing_df = pd.read_csv('listings.csv') # raw listing dataframe with 96 columns
+# raw_review_df = pd.read_csv('reviews.csv') # raw review dataframe with 6 columns
 
-# Select needed 38 columns into useful_listing_df
-useful_listing_df = raw_listing_df[['id', 'listing_url', 'name', 'description', 'thumbnail_url',
-'picture_url','host_id', 'host_url', 'host_name', 'host_since', 'host_response_rate', 'host_is_superhost',\
-'host_listings_count', 'host_identity_verified', 'street', 'zipcode', 'latitude', 'longitude',\
-'room_type', 'accommodates', 'bathrooms', 'bedrooms', 'beds', 'bed_type', 'amenities', 'square_feet',\
-'price', 'weekly_price', 'monthly_price', 'security_deposit', 'cleaning_fee', 'guests_included',\
-'minimum_nights', 'maximum_nights', 'review_scores_rating', 'review_scores_accuracy', \
-'review_scores_cleanliness', 'requires_license', 'reviews_per_month']]
+# # Select needed 38 columns into useful_listing_df
+# useful_listing_df = raw_listing_df[['id', 'listing_url', 'name', 'description', 'thumbnail_url',
+# 'picture_url','host_id', 'host_url', 'host_name', 'host_since', 'host_response_rate', 'host_is_superhost',\
+# 'host_listings_count', 'host_identity_verified', 'street', 'zipcode', 'latitude', 'longitude',\
+# 'room_type', 'accommodates', 'bathrooms', 'bedrooms', 'beds', 'bed_type', 'amenities', 'square_feet',\
+# 'price', 'weekly_price', 'monthly_price', 'security_deposit', 'cleaning_fee', 'guests_included',\
+# 'minimum_nights', 'maximum_nights', 'review_scores_rating', 'review_scores_accuracy', \
+# 'review_scores_cleanliness', 'requires_license', 'reviews_per_month']]
 
-pd.set_option('mode.chained_assignment', None)
-useful_listing_df['host_is_superhost'] = raw_listing_df.host_is_superhost == 't'
-useful_listing_df['host_identity_verified'] = raw_listing_df.host_identity_verified == 't'
-useful_listing_df['requires_license'] = raw_listing_df.requires_license == 't'
+# pd.set_option('mode.chained_assignment', None)
+# useful_listing_df['host_is_superhost'] = raw_listing_df.host_is_superhost == 't'
+# useful_listing_df['host_identity_verified'] = raw_listing_df.host_identity_verified == 't'
+# useful_listing_df['requires_license'] = raw_listing_df.requires_license == 't'
 
 def get_raw_useful_listing_df():
     '''
     Return the raw useful_listing  dataframe
     '''
+    dir = Path(__file__).absolute().parent
+    raw_listing_df = pd.read_csv(dir / 'listings.csv') # raw listing dataframe with 96 columns
+    raw_review_df = pd.read_csv(dir / 'reviews.csv') # raw review dataframe with 6 columns
+
+    # Select needed 38 columns into useful_listing_df
+    useful_listing_df = raw_listing_df[['id', 'listing_url', 'name', 'description', 'thumbnail_url',
+    'picture_url','host_id', 'host_url', 'host_name', 'host_since', 'host_response_rate', 'host_is_superhost',\
+    'host_listings_count', 'host_identity_verified', 'street', 'zipcode', 'latitude', 'longitude',\
+    'room_type', 'accommodates', 'bathrooms', 'bedrooms', 'beds', 'bed_type', 'amenities', 'square_feet',\
+    'price', 'weekly_price', 'monthly_price', 'security_deposit', 'cleaning_fee', 'guests_included',\
+    'minimum_nights', 'maximum_nights', 'review_scores_rating', 'review_scores_accuracy', \
+    'review_scores_cleanliness', 'requires_license', 'reviews_per_month']]
+
+    pd.set_option('mode.chained_assignment', None)
+    useful_listing_df['host_is_superhost'] = raw_listing_df.host_is_superhost == 't'
+    useful_listing_df['host_identity_verified'] = raw_listing_df.host_identity_verified == 't'
+    useful_listing_df['requires_license'] = raw_listing_df.requires_license == 't'
     return useful_listing_df
 
 def show_raw_head():
     '''
     Return the head of useful_listing_df dataframe
     '''
+    useful_listing_df = get_raw_useful_listing_df()
     return useful_listing_df.head()
 
 def primary_recommend_search(zipcode: str, accommodates: int = None, price: str = None, \
@@ -45,6 +64,7 @@ def primary_recommend_search(zipcode: str, accommodates: int = None, price: str 
     Default sorting_list = ['review_scores_rating', 'price'], sorting_way = [False, True] for ascending
     @Return: dataframe
     '''
+    useful_listing_df = get_raw_useful_listing_df()
     temp_df = useful_listing_df[useful_listing_df['zipcode'] == zipcode]
     if accommodates != None:
         temp_df = temp_df[temp_df['accommodates'] >= accommodates]
@@ -81,7 +101,7 @@ def primary_recommend_search(zipcode: str, accommodates: int = None, price: str 
 
 
 def basic_recommend_search(zipcode: str, accommodates: int = None, price: str = None, \
-    review_scores_rating: int = None, sorting_list: list = ['review_scores_rating', 'price'], \
+    review_scores_rating: int = None, limit: int = None, sorting_list: list = ['review_scores_rating', 'price'], \
     sorting_way: list = [False, True]):
     '''
     Recommend house by using basic 4 parameters (zipcode, accommodates, price, overall_rating)
@@ -94,6 +114,7 @@ def basic_recommend_search(zipcode: str, accommodates: int = None, price: str = 
 
     @Return: useful_listing_df, where zipcode == input, accommodates >= input, price <= input, scores >= input
     '''
+    useful_listing_df = get_raw_useful_listing_df()
     temp_df = useful_listing_df[useful_listing_df['zipcode'] == zipcode]
     if accommodates != None:
         temp_df = temp_df[temp_df['accommodates'] >= accommodates]
@@ -102,9 +123,9 @@ def basic_recommend_search(zipcode: str, accommodates: int = None, price: str = 
     if review_scores_rating != None:
         temp_df = temp_df[temp_df['review_scores_rating'] >= review_scores_rating]
     temp_df = temp_df.sort_values(sorting_list, ascending = sorting_way)
+    if limit != None:
+        temp_df = temp_df.head(limit)
     return temp_df
 
-if __name__ == "__main__":
-    get_raw_dataframe()
 
 
