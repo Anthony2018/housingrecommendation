@@ -11,7 +11,6 @@ install:
     - conda config --set always_yes yes --set changeps1 no
     - conda update -q conda
     - conda info -a
-    - conda env create -f environment.yml
     - source activate ntf
     - pip install pandas
     - pip install numpy
