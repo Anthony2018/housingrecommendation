@@ -12,8 +12,8 @@ install:
     - conda update -q conda
     - conda info -a
     # - source activate ntf
-    # - pip install pandas
-    # - pip install numpy
+    - pip install pandas
+    - pip install numpy
 
 script: 
 - cd house_rec/tests
