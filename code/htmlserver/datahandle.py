@@ -20,7 +20,7 @@ useful_listing_df['host_is_superhost'] = raw_listing_df.host_is_superhost == 't'
 useful_listing_df['host_identity_verified'] = raw_listing_df.host_identity_verified == 't'
 useful_listing_df['requires_license'] = raw_listing_df.requires_license == 't'
 
-def get_raw_dataframe():
+def get_raw_useful_listing_df():
     '''
     Return the raw useful_listing  dataframe
     '''
