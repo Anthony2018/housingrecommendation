@@ -1,3 +1,7 @@
+'''
+This python module will read origin raw dataset csv and will select useful
+dataframe. Then it will provide useful method for provide recommendation of house.
+'''
 import pandas as pd
 import numpy as np
 from pathlib import Path
