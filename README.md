@@ -40,16 +40,13 @@ housingrecommendation
 ├─ house_rec
 │    ├─ __init__.py
 │    ├─ code
-│    │    ├─ __init__.py
 │    │    ├─ htmlserver
-│    │    ├─ ml
 │    │    └─ views
 │    ├─ data
 │    │    ├─ calendar.csv
 │    │    ├─ listings.csv
 │    │    └─ reviews.csv
 │    └─ tests
-│           ├─ __init__.py
 │           ├─ test_cleaned_data.py
 │           └─ test_datahandle.py
 ├─ requirment.txt
